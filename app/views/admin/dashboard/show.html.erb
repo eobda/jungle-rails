@@ -2,5 +2,24 @@
 <h1>Admin &raquo; Dashboard</h1>
 </header>
 
-<p>Total products: <%= @total_products %></p>
-<p>Total categories: <%= @total_categories %></p>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5 class="card-title">Total products</h5>
+        <p class="fs-1"><%= @total_products %></p>
+        <p><%= link_to 'All Products', [:admin, :products] %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card h-100 text-center">
+      <div class="card-body">
+        <h5 class="card-title">Total categories</h5>
+        <p class="fs-1"><%= @total_categories %></p>
+        <p> </p>
+      </div>
+    </div>
+  </div>
+</div>
