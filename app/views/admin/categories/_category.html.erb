@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <h4><%= category.name %></h4>
+    <%= category.name %>
   </td>
   <td>
     <%= @products.where(category_id: category.id).size %>
