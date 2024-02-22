@@ -2,10 +2,10 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def create
+  def create #login
   end
 
-  def destroy
+  def destroy #logout
   end
-  
+
 end
