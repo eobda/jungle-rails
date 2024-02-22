@@ -3,6 +3,6 @@
     <h4><%= category.name %></h4>
   </td>
   <td>
-    Quantity Placeholder
+    <%= @products.where(category_id: category.id).size %>
   </td>
 </tr>
