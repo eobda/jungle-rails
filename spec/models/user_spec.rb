@@ -153,6 +153,7 @@ RSpec.describe User, type: :model do
       user.save
       expect(user).to be_valid
       expect(user.authenticate_with_credentials('C@D.com', 'EEEEEEE')).to_not be nil
+      expect(user.authenticate_with_credentials('C@D.com', 'EEEEEEE')).to eql(user)
     end
 
     it 'returns nil if user email does not exist in database' do
