@@ -7,4 +7,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
   validates :password, length: { minimum: 7 }
+
+  def self.authenticate_with_credentials(email, password) do
+    User.find_by(email: email, password: password)
+  end
 end
