@@ -39,6 +39,27 @@ RSpec.describe User, type: :model do
     expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
   end
+
   # emails must be unique, NOT case sensitive
+  it 'returns an error when email is not unique' do
+    user_a = User.new(
+      first_name: 'A',
+      last_name: 'B',
+      email: 'C@D.com',
+      password: 'EEEEEEE',
+      password_confirmation: 'EEEEEEE'
+    )
+    expect(user_a).to be_valid
+
+    user_b = User.new(
+      first_name: 'F',
+      last_name: 'G',
+      email: 'C@D.com',
+      password: 'HHHHHHH',
+      password_confirmation: 'HHHHHHH'
+    )
+    expect(user_b).to_not be_valid
+    expect(user_b.errors.full_messages).to include("...")
+  end
   # email, first name, last name all required
 end
