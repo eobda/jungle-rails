@@ -41,6 +41,19 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
       expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
+
+    it 'returns an error when password is less than 7 characters' do
+      user = User.new(
+      first_name: 'A',
+      last_name: 'B',
+      email: 'C@D.com',
+      password: 'EEEEEE',
+      password_confirmation: 'EEEEEE'
+    )
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include("Password is too short (minimum is 7 characters)")
+    end
   end
 
   # emails must be unique, NOT case sensitive
