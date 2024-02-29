@@ -21,8 +21,8 @@ RSpec.describe User, type: :model do
       first_name: 'A',
       last_name: 'B',
       email: 'C@D.com',
-      password: '',
-      password_confirmation: ''
+      password: nil,
+      password_confirmation: nil
     )
       user.save
       expect(user).to_not be_valid
