@@ -140,4 +140,19 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'authenticate_with_credentials' do
+    it 'successfully authenticates a user' do
+      user = User.new(
+        first_name: 'A',
+        last_name: 'B',
+        email: 'C@D.com',
+        password: 'EEEEEEE',
+        password_confirmation: 'EEEEEEE'
+      )
+      user.save
+      expect(user).to be_valid
+      expect(user.authenticate_with_credentials('C@D.com', 'EEEEEEE')).to be_valid
+    end
+  end
 end
