@@ -44,25 +44,48 @@ RSpec.describe User, type: :model do
   end
 
   # emails must be unique, NOT case sensitive
-  it 'returns an error when email is not unique' do
-    user_a = User.new(
-      first_name: 'A',
-      last_name: 'B',
-      email: 'C@D.com',
-      password: 'EEEEEEE',
-      password_confirmation: 'EEEEEEE'
-    )
-    user_a.save
-    user_b = User.new(
-      first_name: 'F',
-      last_name: 'G',
-      email: 'C@D.com',
-      password: 'HHHHHHH',
-      password_confirmation: 'HHHHHHH'
-    )
-    user_b.save
-    expect(user_b).to_not be_valid
-    expect(user_b.errors.full_messages).to include("Email has already been taken")
+  describe 'Email Validation' do
+    it 'returns an error when email is not unique' do
+      user_a = User.new(
+        first_name: 'A',
+        last_name: 'B',
+        email: 'C@D.com',
+        password: 'EEEEEEE',
+        password_confirmation: 'EEEEEEE'
+      )
+      user_a.save
+      user_b = User.new(
+        first_name: 'F',
+        last_name: 'G',
+        email: 'C@D.com',
+        password: 'HHHHHHH',
+        password_confirmation: 'HHHHHHH'
+      )
+      user_b.save
+      expect(user_b).to_not be_valid
+      expect(user_b.errors.full_messages).to include("Email has already been taken")
+    end
+
+    it 'returns an error when same email is entered with different casing' do
+      user_a = User.new(
+        first_name: 'A',
+        last_name: 'B',
+        email: 'test@test.COM',
+        password: 'EEEEEEE',
+        password_confirmation: 'EEEEEEE'
+      )
+      user_a.save
+      user_b = User.new(
+        first_name: 'F',
+        last_name: 'G',
+        email: 'TEST@TEST.com',
+        password: 'HHHHHHH',
+        password_confirmation: 'HHHHHHH'
+      )
+      user_b.save
+      expect(user_b).to_not be_valid
+      expect(user_b.errors.full_messages).to include("Email has already been taken")
+    end
   end
   # email, first name, last name all required
 end
