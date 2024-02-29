@@ -49,8 +49,7 @@ RSpec.describe User, type: :model do
       password: 'EEEEEEE',
       password_confirmation: 'EEEEEEE'
     )
-    expect(user_a).to be_valid
-
+    user_a.save
     user_b = User.new(
       first_name: 'F',
       last_name: 'G',
@@ -58,8 +57,9 @@ RSpec.describe User, type: :model do
       password: 'HHHHHHH',
       password_confirmation: 'HHHHHHH'
     )
+    user_b.save
     expect(user_b).to_not be_valid
-    expect(user_b.errors.full_messages).to include("...")
+    expect(user_b.errors.full_messages).to include("Email has already been taken")
   end
   # email, first name, last name all required
 end
