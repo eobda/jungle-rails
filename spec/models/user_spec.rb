@@ -86,6 +86,19 @@ RSpec.describe User, type: :model do
       expect(user_b).to_not be_valid
       expect(user_b.errors.full_messages).to include("Email has already been taken")
     end
+
+    it 'returns an error when email is not present' do
+      user = User.new(
+      first_name: 'A',
+      last_name: 'B',
+      email: nil,
+      password: 'EEEEEEE',
+      password_confirmation: 'EEEEEEE'
+    )
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include("Email can't be blank")
+    end
   end
   # email, first name, last name all required
 end
