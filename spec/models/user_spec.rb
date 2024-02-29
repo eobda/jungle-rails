@@ -21,10 +21,22 @@ RSpec.describe User, type: :model do
       last_name: 'B',
       email: 'C@D.com',
       password: '',
-      password_confirmation: 'EEEEEEE'
+      password_confirmation: ''
     )
     expect(user).to_not be_valid
     expect(user.errors.full_messages).to include("Password can't be blank")
+    end
+
+    it 'returns an error when password confirmation does not match password' do
+      user = User.new(
+      first_name: 'A',
+      last_name: 'B',
+      email: 'C@D.com',
+      password: 'EEEEEEE',
+      password_confirmation: 'EEE'
+    )
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
   end
   # emails must be unique, NOT case sensitive
