@@ -100,5 +100,20 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include("Email can't be blank")
     end
   end
+
+  describe "Name Validation" do
+    it 'returns an error when first_name is not present' do
+      user = User.new(
+      first_name: nil,
+      last_name: 'B',
+      email: 'C@D.com',
+      password: 'EEEEEEE',
+      password_confirmation: 'EEEEEEE'
+    )
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include("First name can't be blank")
+    end
+  end
   # email, first name, last name all required
 end
