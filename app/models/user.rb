@@ -9,6 +9,11 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 7 }
 
   def self.authenticate_with_credentials(email, password) do
-    User.find_by(email: email, password: password)
+    user = User.find_by(email: email)
+    if user.authenticate(password)
+      user
+    else
+      nil
+    end
   end
 end
