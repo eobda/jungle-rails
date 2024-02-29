@@ -167,5 +167,18 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
       expect(user.authenticate_with_credentials('A@B.com', 'EEEEEEE')).to be nil
     end
+
+    it 'returns nil if user password is incorrect' do
+      user = User.new(
+        first_name: 'A',
+        last_name: 'B',
+        email: 'C@D.com',
+        password: 'EEEEEEE',
+        password_confirmation: 'EEEEEEE'
+      )
+      user.save
+      expect(user).to be_valid
+      expect(user.authenticate_with_credentials('C@D.com', 'FFFFFFF')).to be nil
+    end
   end
 end
