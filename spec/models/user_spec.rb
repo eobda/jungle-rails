@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
       password: 'EEEEEEE',
       password_confirmation: 'EEEEEEE'
     )
+    user.save
     expect(user).to be_valid
   end
 
@@ -23,8 +24,9 @@ RSpec.describe User, type: :model do
       password: '',
       password_confirmation: ''
     )
-    expect(user).to_not be_valid
-    expect(user.errors.full_messages).to include("Password can't be blank")
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include("Password can't be blank")
     end
 
     it 'returns an error when password confirmation does not match password' do
@@ -35,8 +37,9 @@ RSpec.describe User, type: :model do
       password: 'EEEEEEE',
       password_confirmation: 'EEE'
     )
-    expect(user).to_not be_valid
-    expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      user.save
+      expect(user).to_not be_valid
+      expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
   end
 
