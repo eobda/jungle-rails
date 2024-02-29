@@ -22,7 +22,7 @@ RSpec.describe Product, type: :model do
       category = Category.new(name: 'x')
       product = Product.new(name: 'y', price_cents: nil, quantity: 10, category: category)
       expect(product).to_not be_valid
-      expect(product.errors.full_messages).to include("Name can't be blank")
+      expect(product.errors.full_messages).to include("Price can't be blank")
     end
 
     # validates :quantity, presence: true
