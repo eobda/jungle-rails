@@ -152,7 +152,7 @@ RSpec.describe User, type: :model do
       )
       user.save
       expect(user).to be_valid
-      expect(user.authenticate_with_credentials('C@D.com', 'EEEEEEE')).to be_valid
+      expect(user.authenticate_with_credentials('C@D.com', 'EEEEEEE')).to_not be nil
     end
   end
 end
