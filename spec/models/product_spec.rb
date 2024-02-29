@@ -34,5 +34,11 @@ RSpec.describe Product, type: :model do
     end
 
     # validates :category, presence: true
+    it 'returns an error when :price is not present' do
+      category = Category.new(name: 'x')
+      product = Product.new(name: 'y', price_cents: 500, quantity: 10, category: nil)
+      expect(product).to_not be_valid
+      expect(product.errors.full_messages).to include("Category can't be blank")
+    end
   end
 end
