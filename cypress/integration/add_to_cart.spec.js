@@ -9,6 +9,7 @@ describe("home page tests", () => {
 
   it ("increases the count of the cart button when the 'Add to Cart' button is pressed", () => {
     cy.get(".btn").contains('Add').first().click({ force: true });
+    cy.get(".navbar-nav .end-0 .nav-link").should("contain.text", "1")
   });
 
 });
