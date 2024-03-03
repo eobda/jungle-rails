@@ -7,4 +7,8 @@ describe("home page tests", () => {
     cy.get(".products article").should("be.visible");
   });
 
+  it ("increases the count of the cart button when the 'Add to Cart' button is pressed", () => {
+    cy.get(".btn").contains('Add').first().click();
+  });
+
 });
